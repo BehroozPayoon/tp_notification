@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tp-notification"
+version = "1.0.0"
+description = ""
+authors = ["Behrooz Payoon <behrooz.payoon@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.7"
+djangorestframework = "^3.15.2"
+requests = "^2.32.3"
+celery = "^5.4.0"
+redis = "^5.0.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

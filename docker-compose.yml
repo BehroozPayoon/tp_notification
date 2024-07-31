@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  notfication_service:
+    image: tp_notifications:latest
+    container_name: notification_service
+    command: "python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    networks:
+      - backend
+    volumes:
+      - ./.:/app
+    ports:
+      - 8001:8000
+    depends_on:
+      - redis
+
+  celery_worker:
+    image: tp_notifications:latest
+    command: celery -A notification_service worker --loglevel=info
+    networks:
+      - backend
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
